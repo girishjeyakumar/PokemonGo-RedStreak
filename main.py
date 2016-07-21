@@ -693,7 +693,7 @@ def encounter_and_capture(pokemon):
                         reason = 'It ran away!'
                     else:
                         reason = 'It escaped!'
-                    print '[!] Encountered but was unable to capture %s of CP %d.%s' % (pokemon['name'], cp, reason)
+                    # print '[!] Encountered but was unable to capture %s of CP %d.%s' % (pokemon['name'], cp, reason)
                     break
 
 
@@ -709,9 +709,9 @@ def spin(pokestop, fortid):
 def main():
     getNearbyPokemon()
 
-    print "[+] Number of pokemons found in the neighbourhood: %d" % (len(pokemons))
+    # print "[+] Number of pokemons found in the neighbourhood: %d" % (len(pokemons))
 
-    print pokemons
+    # print pokemons
     # print pokestops
     # print gyms
 
@@ -723,13 +723,11 @@ def main():
             encounter_and_capture(pokemon)
             pokemons.remove(pokemon)
             time.sleep(5)
-
-    # print "---- Spinning Pokestops -----"
-    #
-    # for key in pokestops:
-    #     pokestop = pokestops[key]
-    #     spin(pokestop, key)
-        # time.sleep(5)
+    
+        for key in pokestops:
+            pokestop = pokestops[key]
+            spin(pokestop, key)
+            time.sleep(3)
 
 if __name__ == '__main__':
     main()
