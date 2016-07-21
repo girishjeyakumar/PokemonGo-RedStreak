@@ -1,5 +1,7 @@
 #PokemonGo-RedStreak
 
+<b>Disclaimer: Using this software is against the ToS and can get you banned. Use at your own risk.<b>
+
 Currently includes the following PokemonGo hacks
 <br> 1) Seeking and capturing specific pokemon within a given radius from a given location
 <br> 2) Farming Pokestops within a given radius from a given location
@@ -30,9 +32,6 @@ location can be an address or (lat,lng)
 Move into the project folder in the terminal and then run <b>python main.py -st 10</b>
 
 st indicates the number of steps away from your location it should look, higher numbers being farther.
-
-<br>
-<br> Using this software is against the ToS and can get you banned. Use at your own risk.
 
 ##Credits
 Building off Mila432's [PokemonGo Map](https://github.com/Mila432/Pokemon_Go_API) and tjado's [pgoapi](https://github.com/tejado/pgoapi)
