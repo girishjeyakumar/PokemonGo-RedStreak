@@ -6,18 +6,18 @@ Currently includes the following PokemonGo hacks
 <br> 1) Seeking and capturing specific pokemon within a given radius from a given location
 <br> 2) Farming Pokestops within a given radius from a given location
 
-###Prerequisites
+##Prerequisites
 
 Installation will require Python 2.7 and Pip.Python 3 is currently not supported.
 
-####Ubuntu or Debian
+###Ubuntu or Debian
 
 You can install Python and Pip on Ubuntu by running the following command:
 ```
 sudo apt-get install python python-pip
 ```
 
-####Windows
+###Windows
 
 Download Python [here](https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi) and install. Then download [pip](https://bootstrap.pypa.io/get-pip.py) (right click that link and choose "Save Link As"), and double click the file you downloaded, assuming you installed Python correctly.
 
