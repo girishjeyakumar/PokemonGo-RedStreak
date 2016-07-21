@@ -31,7 +31,7 @@ location can be an address or (lat,lng)
 ###Step 3
 Move into the project folder in the terminal and then run <b>python main.py -st 10</b>
 
-st indicates the number of steps away from your location it should look, higher numbers being farther.
+st indicates the number of steps away from your location it should look, higher numbers being farther.5 steps is approximately a 1.2km radius.
 
 ##Credits
 Building off Mila432's [PokemonGo Map](https://github.com/Mila432/Pokemon_Go_API) and tjado's [pgoapi](https://github.com/tejado/pgoapi)
