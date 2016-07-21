@@ -6,7 +6,16 @@ Currently includes the following PokemonGo hacks
 
 <br> usage: python main.py [-h] [-a AUTH_SERVICE] -u USERNAME [-p PASSWORD] -l LOCATION -st STEP_LIMIT [-i IGNORE | -o ONLY] 
 
-<br> One may also create a file config.json containing your authentication details as shown below
+##Usage
+
+###Step1
+
+Download the project zip and unzip in it a desired location on your local system.
+
+###Step2
+
+Create a file config.json with your authentication details as shown below and place it inside the project folder along with main.py
+#### Contents of config.json
 
 {
     "auth_service": "google",
@@ -15,9 +24,10 @@ Currently includes the following PokemonGo hacks
     "location": "0.0,0.0"
 }
 
-location can be an address or lat,lng
+location can be an address or (lat,lng)
 
-And then run python main.py -st 10
+###Step 3
+Move into the project folder in the terminal and then run <b>python main.py -st 10</b>
 
 st indicates the number of steps away from your location it should look, higher numbers being farther.
 
