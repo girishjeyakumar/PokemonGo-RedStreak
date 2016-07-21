@@ -8,7 +8,7 @@ Currently includes the following PokemonGo hacks
 
 ###Prerequisites
 
-Installation will require Python 2.7 and Pip.Python 3 is not currently supported.
+Installation will require Python 2.7 and Pip.Python 3 is currently not supported.
 
 ####Ubuntu or Debian
 
