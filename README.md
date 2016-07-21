@@ -56,6 +56,20 @@ python main.py -st 10
 ```
 The number following -st indicates the maximum number of steps away from your location it should look, higher numbers being farther.5 steps is approximately a 1.2km radius.
 
+###Using IGNORE and ONLY
+
+Run the following command to ignore some pokemon even if it appears in your scope.These wild pokemon would not be captured.
+
+```
+python main.py -st 10 -i Pidgey,Rattata
+```
+
+Run the following command to only focus on some pokemon that appears in your scope.These wild pokemon are the only ones that would be captured.
+
+```
+python main.py -st 10 -o Pidgey,Rattata
+```
+
 ##Credits
 Building off Mila432's [PokemonGo Map](https://github.com/Mila432/Pokemon_Go_API) and tjado's [pgoapi](https://github.com/tejado/pgoapi)
 
