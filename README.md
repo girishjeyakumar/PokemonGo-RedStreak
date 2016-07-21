@@ -24,7 +24,6 @@ Download Python [here](https://www.python.org/ftp/python/2.7.12/python-2.7.12.am
 ##Setup
 - Download the project zip and unzip in it a desired location on your local system.
 - Create a file config.json with your authentication details as it's content as shown below and place it inside the project folder along with main.py
-- 
 ```
 config.json
 
@@ -53,7 +52,7 @@ Move into the project folder in the terminal and then run:
 ```
 python main.py -st 10
 ```
-st indicates the number of steps away from your location it should look, higher numbers being farther.5 steps is approximately a 1.2km radius.
+The number following -st indicates the maximum number of steps away from your location it should look, higher numbers being farther.5 steps is approximately a 1.2km radius.
 
 ##Credits
 Building off Mila432's [PokemonGo Map](https://github.com/Mila432/Pokemon_Go_API) and tjado's [pgoapi](https://github.com/tejado/pgoapi)
