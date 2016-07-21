@@ -436,14 +436,14 @@ def login(config):
     if access_token is None:
         raise Exception('[-] Wrong username/password')
 
-    print '[+] RPC Session Token: {} ...'.format(access_token[:25])
+    # print '[+] RPC Session Token: {} ...'.format(access_token[:25])
 
     api_endpoint = get_api_endpoint(config.auth_service, access_token)
 
     if api_endpoint is None:
         raise Exception('[-] RPC server offline')
 
-    print '[+] Received API endpoint: {}'.format(api_endpoint)
+    # print '[+] Received API endpoint: {}'.format(api_endpoint)
 
     profile_response = retrying_get_profile(config.auth_service, access_token,
                                             api_endpoint, None)
@@ -477,13 +477,13 @@ def getNearbyPokemon():
         print '[!] Invalid Auth service specified'
         return
 
-    print('[+] Locale is ' + config.locale)
+    # print('[+] Locale is ' + config.locale)
     pokemonsJSON = json.load(open(path + '/locales/pokemon.' + config.locale + '.json'))
 
-    if config.debug:
-        global DEBUG
-        DEBUG = True
-        print '[!] DEBUG mode on'
+    # if config.debug:
+    #     global DEBUG
+    #     DEBUG = True
+    #     print '[!] DEBUG mode on'
 
     # only get location for first run
     if not (FLOAT_LAT and FLOAT_LONG):
@@ -677,9 +677,11 @@ def encounter_and_capture(pokemon):
             resp = api.call()
 
             # print('Response dictionary: \n\r{}'.format(json.dumps(resp, indent=2)))
-
-            en_status = resp['responses']['ENCOUNTER']['status']
-            cap_status = resp['responses']['CATCH_POKEMON']['status']
+            try:
+                en_status = resp['responses']['ENCOUNTER']['status']
+                cap_status = resp['responses']['CATCH_POKEMON']['status']
+            except KeyError:
+                return
 
             if en_status == 1:
 
