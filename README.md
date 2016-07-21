@@ -9,7 +9,7 @@ Currently includes the following PokemonGo hacks
 <br> One may also create a file config.json containing your authentication details as shown below
 
 {
-    "auth_service": "google"
+    "auth_service": "google",
     "username": "test@gmail.com",
     "password": "password",
     "location": "0.0,0.0"
