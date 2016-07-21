@@ -6,7 +6,7 @@ Currently includes the following:
 - Automatic seeking and capturing specific pokemon within a given radius from a given location
 - Automatic farming Pokestops within a given radius from a given location
 
-This project is currently at an early stage of development.So there might be some bugs.Please report them.They will be fixed at the earliest possible.
+This project is currently at an early stage of development.So there might be a few bugs.Please report them.They will be fixed at the earliest possible.
 
 ##Prerequisites
 
