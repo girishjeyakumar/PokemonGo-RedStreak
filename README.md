@@ -23,14 +23,16 @@ Download Python [here](https://www.python.org/ftp/python/2.7.12/python-2.7.12.am
 
 ##Setup
 - Download the project zip and unzip in it a desired location on your local system.
-- Create a file config.json with your authentication details as shown below and place it inside the project folder along with main.py
-<br><b>Contents of config.json</b> (location can be an address or (lat,lng))
+- Create a file config.json with your authentication details as it's content as shown below and place it inside the project folder along with main.py
+- 
 ```
+config.json
+
 {
-    "auth_service": "google",
-    "username": "test@gmail.com",
+    "auth_service": "google [or ptc]",
+    "username": "unsername",
     "password": "password",
-    "location": "0.0,0.0"
+    "location": "0.0,0.0 [or Valid Address]"
 }
 ```
 ##Install Dependencies
