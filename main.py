@@ -542,7 +542,7 @@ def getNearbyPokemon():
 
 def process_step(config, api_endpoint, access_token, profile_response,
                  pokemonsJSON, ignore, only):
-    print('[+] Searching for Pokemon at location {} {}'.format(FLOAT_LAT, FLOAT_LONG))
+    print('[+] Searching at location {} {}'.format(FLOAT_LAT, FLOAT_LONG))
 
     origin = LatLng.from_degrees(FLOAT_LAT, FLOAT_LONG)
     step_lat = FLOAT_LAT
@@ -657,13 +657,16 @@ def encounter_and_capture(pokemon):
 
     encounter_id, spawnpoint_id = -1, -1
 
-    for x in resp['responses']['GET_MAP_OBJECTS']['map_cells']:
-        if encounter_id != -1: break
-        if 'catchable_pokemons' in x:
-            for p in x['catchable_pokemons']:
-                if p['pokemon_id'] == pokemon['id']:
-                    encounter_id, spawnpoint_id = p['encounter_id'], p['spawnpoint_id']
-                    break
+    try:
+        for x in resp['responses']['GET_MAP_OBJECTS']['map_cells']:
+            if encounter_id != -1: break
+            if 'catchable_pokemons' in x:
+                for p in x['catchable_pokemons']:
+                    if p['pokemon_id'] == pokemon['id']:
+                        encounter_id, spawnpoint_id = p['encounter_id'], p['spawnpoint_id']
+                        break
+    except KeyError:
+        pass
 
     if encounter_id != -1:
 
@@ -689,6 +692,7 @@ def encounter_and_capture(pokemon):
 
                 if cap_status == 1:
                     print '[+] %s of CP %d has been successfully captured' % (pokemon['name'], cp)
+                    pokemons.remove(pokemon)
                     break
                 elif cap_status != 4:
                     if cap_status == 3:
@@ -705,8 +709,11 @@ def spin(pokestop, fortid):
     api.fort_search(fort_id=fortid, fort_latitude=lat, fort_longitude=lng, player_latitude=f2i(lat),
                     player_longitude=f2i(lng))
     resp = api.call()
+    # print resp
     if 'experience_awarded' in resp['responses']['FORT_SEARCH']:
+        print "---- Spinning Pokestop ----"
         print "[+] Successfully gained %d XP and other items from spinning Pokestop %s" %(resp['responses']['FORT_SEARCH']['experience_awarded'],fortid)
+        print "---------------------------"
 
 def main():
     getNearbyPokemon()
@@ -723,7 +730,6 @@ def main():
 
         for pokemon in pokemons:
             encounter_and_capture(pokemon)
-            pokemons.remove(pokemon)
             time.sleep(5)
     
         for key in pokestops:
