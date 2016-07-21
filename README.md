@@ -8,6 +8,8 @@ Currently includes the following:
 
 This project is currently at an early stage of development.So there might be a few bugs.Please report them.They will be fixed at the earliest possible.
 
+Note: Found to work better when the user is offline and the app is closed on the phone while running this.It prevents contradicting location data from the phone and your local system being sent to the backend simultaneously.
+
 ##Prerequisites
 
 Installation will require Python 2.7 and Pip.Python 3 is currently not supported.
