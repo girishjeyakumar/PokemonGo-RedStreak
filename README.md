@@ -3,8 +3,8 @@
 <b>Disclaimer: Using this software is against the ToS and can get you banned. Use at your own risk.</b>
 
 Currently includes the following PokemonGo hacks
-<br> 1) Seeking and capturing specific pokemon within a given radius from a given location
-<br> 2) Farming Pokestops within a given radius from a given location
+- Seeking and capturing specific pokemon within a given radius from a given location
+- Farming Pokestops within a given radius from a given location
 
 ##Prerequisites
 
