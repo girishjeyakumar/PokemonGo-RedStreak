@@ -6,8 +6,6 @@ Currently includes the following PokemonGo hacks
 <br> 1) Seeking and capturing specific pokemon within a given radius from a given location
 <br> 2) Farming Pokestops within a given radius from a given location
 
-<br> usage: python main.py [-h] [-a AUTH_SERVICE] -u USERNAME [-p PASSWORD] -l LOCATION -st STEP_LIMIT [-i IGNORE | -o ONLY] 
-
 ###Prerequisites
 
 Installation will require Python 2.7 and Pip.Python 3 is not currently supported.
@@ -23,16 +21,10 @@ sudo apt-get install python python-pip
 
 Download Python [here](https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi) and install. Then download [pip](https://bootstrap.pypa.io/get-pip.py) (right click that link and choose "Save Link As"), and double click the file you downloaded, assuming you installed Python correctly.
 
-##Usage
-
-###Step1
-
-Download the project zip and unzip in it a desired location on your local system.
-
-###Step2
-
-Create a file config.json with your authentication details as shown below and place it inside the project folder along with main.py
-#### Contents of config.json
+##Setup
+- Download the project zip and unzip in it a desired location on your local system.
+- Create a file config.json with your authentication details as shown below and place it inside the project folder along with main.py
+<br><b>Contents of config.json</b> (location can be an address or (lat,lng))
 ```
 {
     "auth_service": "google",
@@ -41,9 +33,20 @@ Create a file config.json with your authentication details as shown below and pl
     "location": "0.0,0.0"
 }
 ```
-location can be an address or (lat,lng)
+##Install Dependencies
 
-###Step 3
+Now, open a Terminal/Command Line (```Win```+```R``` and ```cmd``` on Windows) and ```cd``` to the folder you extracted the zip file to.
+```
+cd some/directory/
+```
+In Windows you can also right click within the folder and select "Open Command Window Here."
+Then enter the following:
+```
+pip install -r requirements.txt
+```
+
+##Running
+
 Move into the project folder in the terminal and then run:
 ```
 python main.py -st 10
