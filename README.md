@@ -22,10 +22,10 @@ sudo apt-get install python python-pip
 Download Python [here](https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi) and install. Then download [pip](https://bootstrap.pypa.io/get-pip.py) (right click that link and choose "Save Link As"), and double click the file you downloaded, assuming you installed Python correctly.
 
 ##Setup
-- Download the project zip and unzip in it a desired location on your local system.
-- Create a file config.json with your authentication details as it's content as shown below and place it inside the project folder along with main.py
+- Download the project zip and unzip it in a desired location on your local system.
+- Create a file config.json with your authentication details,as it's content, as shown below and place it inside the project folder along with main.py
 ```
-config.json
+**Content of config.json**
 
 {
     "auth_service": "google [or ptc]",
