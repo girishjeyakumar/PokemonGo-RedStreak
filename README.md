@@ -8,6 +8,21 @@ Currently includes the following PokemonGo hacks
 
 <br> usage: python main.py [-h] [-a AUTH_SERVICE] -u USERNAME [-p PASSWORD] -l LOCATION -st STEP_LIMIT [-i IGNORE | -o ONLY] 
 
+###Prerequisites
+
+Installation will require Python 2.7 and Pip.Python 3 is not currently supported.
+
+####Ubuntu or Debian
+
+You can install Python and Pip on Ubuntu by running the following command:
+```
+sudo apt-get install python python-pip
+```
+
+####Windows
+
+Download Python [here](https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi) and install. Then download [pip](https://bootstrap.pypa.io/get-pip.py) (right click that link and choose "Save Link As"), and double click the file you downloaded, assuming you installed Python correctly.
+
 ##Usage
 
 ###Step1
@@ -18,19 +33,21 @@ Download the project zip and unzip in it a desired location on your local system
 
 Create a file config.json with your authentication details as shown below and place it inside the project folder along with main.py
 #### Contents of config.json
-
+```
 {
     "auth_service": "google",
     "username": "test@gmail.com",
     "password": "password",
     "location": "0.0,0.0"
 }
-
+```
 location can be an address or (lat,lng)
 
 ###Step 3
-Move into the project folder in the terminal and then run <b>python main.py -st 10</b>
-
+Move into the project folder in the terminal and then run:
+```
+python main.py -st 10
+```
 st indicates the number of steps away from your location it should look, higher numbers being farther.5 steps is approximately a 1.2km radius.
 
 ##Credits
