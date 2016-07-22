@@ -6,9 +6,9 @@ Currently includes the following:
 - Automatic seeking and capturing of specific pokemon within a given radius from a given location
 - Automatic farming of some Pokestops within a given radius from a given location
 
-##Some info
+##Some Info
 
-One of the main goals of the project was to understand the API, to have some fun with the game and to give other developers a starting point.This is definitely not the recommended way of playing the game and Niantic might soon come up more strict retaliations for these hacks.But having to capture nearly 100 Magikarps to get a Gyrados? That's a little too far and here is your solution!
+One of the main goals of the project was to understand the API, to have some fun with the game and to give other developers a starting point.This is definitely not the recommended way of playing the game and Niantic might soon come up more strict retaliations for these hacks.But having to capture nearly 100 Magikarps to get enough candies for a Gyrados? That's a little too far and here is your solution!
 
 There might not be much more development on this.But I learnt a lot and it was a lot of fun spinning pokestops,catching more than 20 pokemons, catching enough Eevees to get a Jolteon and gaining more than 4000xp, in a couple of hours, just sitting at home!
 
