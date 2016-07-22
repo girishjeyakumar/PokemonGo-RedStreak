@@ -81,7 +81,7 @@ python main.py -st 10 -o Pidgey,Rattata
 ```
 
 ##Credits
-Building off Mila432's [PokemonGo Map](https://github.com/Mila432/Pokemon_Go_API) and tjado's [pgoapi](https://github.com/tejado/pgoapi)
+Building off AHAAAAAAA's [PokemonGo Map](https://github.com/AHAAAAAAA/PokemonGo-Map) and tjado's [pgoapi](https://github.com/tejado/pgoapi)
 
 
 
