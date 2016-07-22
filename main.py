@@ -615,8 +615,8 @@ def clear_stale_pokemons():
 
     for pokemon in pokemons:
         if current_time > pokemon['disappear_time']:
-            # debug("[+] removing stale pokemon %s at %f, %f from list" % (
-                # pokemon['name'].encode('utf-8'), pokemon['lat'], pokemon['lng']))
+            debug("[+] removing stale pokemon %s at %f, %f from list" % (
+                pokemon['name'].encode('utf-8'), pokemon['lat'], pokemon['lng']))
             pokemons.remove(pokemon)
 
 def register_background_thread(initial_registration=False):
@@ -667,6 +667,7 @@ def encounter_and_capture(pokemon):
                         encounter_id, spawnpoint_id = p['encounter_id'], p['spawnpoint_id']
                         break
     except KeyError:
+        debug(e)
         pass
 
     if encounter_id != -1:
@@ -700,7 +701,7 @@ def encounter_and_capture(pokemon):
                         reason = 'It ran away!'
                     else:
                         reason = 'It escaped!'
-                    # debug('[!] Encountered but was unable to capture %s of CP %d.%s' % (pokemon['name'], cp, reason))
+                    debug('[!] Encountered but was unable to capture %s of CP %d.%s' % (pokemon['name'], cp, reason))
                     break
 
 
@@ -711,15 +712,19 @@ def spin(pokestop, fortid):
                     player_longitude=f2i(lng))
     resp = api.call()
     # print resp
-    if 'experience_awarded' in resp['responses']['FORT_SEARCH']:
-        print "---- Spinning Pokestop ----"
-        print "[+] Successfully gained %d XP and other items from spinning Pokestop %s" %(resp['responses']['FORT_SEARCH']['experience_awarded'],fortid)
-        print "---------------------------"
+    try:
+        if 'experience_awarded' in resp['responses']['FORT_SEARCH']:
+            print "---- Spinning Pokestop ----"
+            print "[+] Successfully gained %d XP and other items from spinning Pokestop %s" %(resp['responses']['FORT_SEARCH']['experience_awarded'],fortid)
+            print "---------------------------"
+    except KeyError as e:
+        debug(e)
+        return
 
 def main():
     getNearbyPokemon()
 
-    # debug("[+] Number of pokemons found in the neighbourhood: %d" % (len(pokemons)))
+    debug("[+] Number of pokemons found in the neighbourhood: %d" % (len(pokemons)))
 
     # print pokemons
     # print pokestops
