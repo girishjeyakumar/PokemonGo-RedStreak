@@ -436,14 +436,14 @@ def login(config):
     if access_token is None:
         raise Exception('[-] Wrong username/password')
 
-    # print '[+] RPC Session Token: {} ...'.format(access_token[:25])
+    debug('[+] RPC Session Token: {} ...'.format(access_token[:25]))
 
     api_endpoint = get_api_endpoint(config.auth_service, access_token)
 
     if api_endpoint is None:
         raise Exception('[-] RPC server offline')
 
-    # print '[+] Received API endpoint: {}'.format(api_endpoint)
+    debug('[+] Received API endpoint: {}'.format(api_endpoint))
 
     profile_response = retrying_get_profile(config.auth_service, access_token,
                                             api_endpoint, None)
@@ -477,7 +477,8 @@ def getNearbyPokemon():
         print '[!] Invalid Auth service specified'
         return
 
-    # print('[+] Locale is ' + config.locale)
+    debug('[+] Locale is ' + config.locale)
+
     pokemonsJSON = json.load(open(path + '/locales/pokemon.' + config.locale + '.json'))
 
     # if config.debug:
@@ -531,7 +532,7 @@ def getNearbyPokemon():
 
     if (NEXT_LAT and NEXT_LONG and
             (NEXT_LAT != FLOAT_LAT or NEXT_LONG != FLOAT_LONG)):
-        print('Update to next location %f, %f' % (NEXT_LAT, NEXT_LONG))
+        debug('Update to next location %f, %f' % (NEXT_LAT, NEXT_LONG))
         set_location_coords(NEXT_LAT, NEXT_LONG, 0)
         NEXT_LAT = 0
         NEXT_LONG = 0
@@ -614,8 +615,8 @@ def clear_stale_pokemons():
 
     for pokemon in pokemons:
         if current_time > pokemon['disappear_time']:
-            print "[+] removing stale pokemon %s at %f, %f from list" % (
-                pokemon['name'].encode('utf-8'), pokemon['lat'], pokemon['lng'])
+            debug("[+] removing stale pokemon %s at %f, %f from list" % (
+                pokemon['name'].encode('utf-8'), pokemon['lat'], pokemon['lng']))
             pokemons.remove(pokemon)
 
 def register_background_thread(initial_registration=False):
@@ -699,7 +700,7 @@ def encounter_and_capture(pokemon):
                         reason = 'It ran away!'
                     else:
                         reason = 'It escaped!'
-                    # print '[!] Encountered but was unable to capture %s of CP %d.%s' % (pokemon['name'], cp, reason)
+                    debug('[!] Encountered but was unable to capture %s of CP %d.%s' % (pokemon['name'], cp, reason))
                     break
 
 
@@ -718,7 +719,7 @@ def spin(pokestop, fortid):
 def main():
     getNearbyPokemon()
 
-    # print "[+] Number of pokemons found in the neighbourhood: %d" % (len(pokemons))
+    debug("[+] Number of pokemons found in the neighbourhood: %d" % (len(pokemons)))
 
     # print pokemons
     # print pokestops
