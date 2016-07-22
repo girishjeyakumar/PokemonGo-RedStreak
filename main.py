@@ -666,7 +666,7 @@ def encounter_and_capture(pokemon):
                     if p['pokemon_id'] == pokemon['id']:
                         encounter_id, spawnpoint_id = p['encounter_id'], p['spawnpoint_id']
                         break
-    except KeyError:
+    except KeyError as e:
         debug(e)
         pass
 
