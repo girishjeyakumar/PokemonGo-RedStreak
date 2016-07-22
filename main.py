@@ -582,7 +582,8 @@ def process_step(config, api_endpoint, access_token, profile_response,
                                 gyms[Fort.FortId] = [Fort.Team, Fort.Latitude, Fort.Longitude, Fort.GymPoints]
                             elif Fort.FortType:
                                 pokestops[Fort.FortId] = [Fort.Latitude, Fort.Longitude]
-        except AttributeError:
+        except AttributeError as e:
+            debug(e)
             break
 
     for poke in visible:
@@ -666,7 +667,7 @@ def encounter_and_capture(pokemon):
                     if p['pokemon_id'] == pokemon['id']:
                         encounter_id, spawnpoint_id = p['encounter_id'], p['spawnpoint_id']
                         break
-    except KeyError as e:
+    except Exception as e:
         debug(e)
         pass
 
@@ -685,7 +686,8 @@ def encounter_and_capture(pokemon):
             try:
                 en_status = resp['responses']['ENCOUNTER']['status']
                 cap_status = resp['responses']['CATCH_POKEMON']['status']
-            except KeyError:
+            except Exception as e:
+                debug(e)
                 return
 
             if en_status == 1:
@@ -717,7 +719,7 @@ def spin(pokestop, fortid):
             print "---- Spinning Pokestop ----"
             print "[+] Successfully gained %d XP and other items from spinning Pokestop %s" %(resp['responses']['FORT_SEARCH']['experience_awarded'],fortid)
             print "---------------------------"
-    except KeyError as e:
+    except Exception as e:
         debug(e)
         return
 
