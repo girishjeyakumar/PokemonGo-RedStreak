@@ -4,11 +4,19 @@
 
 Currently includes the following:
 - Automatic seeking and capturing of specific pokemon within a given radius from a given location
-- Automatic farming of Pokestops within a given radius from a given location
+- Automatic farming some Pokestops within a given radius from a given location
 
-This project is currently at an early stage of development.So there might be a few bugs.Please report them.They will be fixed at the earliest possible.
+##Some info
 
-**Note**: Found to work better when the user is offline and the app is closed on the phone while running this.It prevents contradicting location data from the phone and your local system being sent to the backend simultaneously.
+One of the main goals of the project was to understand the API, to have some fun with the game and to give other developers a starting point.This is definitely not the recommended way of playing the game and Niantic might soon come up more strict retaliations for these hacks.
+
+There might not be much more development on this.But I learnt a lot and it was a lot of fun catching more than 20 pokemons ,spinning Pokestops and gaining more than 3000xp in around an hour just sitting at home.
+
+Other develpers are welcome to build on this and come up with more cool stuff.I am looking forward to seeing your additions.
+
+**Note**: 
+- Found to work better when the user is offline and the app is closed on the phone while running this.It prevents contradicting location data from the phone and your local system being sent to the backend simultaneously.
+- Refrain from using large search radius as they have a higher chance of getting you banned.Limit to a step-limit of 1 or 2 to be on safer side.
 
 ##Prerequisites
 
@@ -75,7 +83,6 @@ python main.py -st 10 -o Pidgey,Rattata
 ##Credits
 Building off Mila432's [PokemonGo Map](https://github.com/Mila432/Pokemon_Go_API) and tjado's [pgoapi](https://github.com/tejado/pgoapi)
 
-<br>
-If you have an idea for a new feature that could be added, please go ahead!
+
 
 
