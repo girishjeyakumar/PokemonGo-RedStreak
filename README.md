@@ -4,7 +4,7 @@
 
 Currently includes the following:
 - Automatic seeking and capturing of specific pokemon within a given radius from a given location
-- Automatic farming of some Pokestops within a given radius from a given location
+- Automatic farming of some Pokestop within a given radius from a given location from time to time
 
 ##Some Info
 
