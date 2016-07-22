@@ -10,7 +10,7 @@ Currently includes the following:
 
 One of the main goals of the project was to understand the API, to have some fun with the game and to give other developers a starting point.This is definitely not the recommended way of playing the game and Niantic might soon come up more strict retaliations for these hacks.But having to capture nearly 100 Magikarps to get a Gyrados? That's a little too far and here is your solution!
 
-There might not be much more development on this.But I learnt a lot and it was a lot of fun spinning pokestops,catching more than 20 pokemons, catching enough Eevees to get a Jolteon and gaining more than 3000xp, in a couple of hours, just sitting at home!
+There might not be much more development on this.But I learnt a lot and it was a lot of fun spinning pokestops,catching more than 20 pokemons, catching enough Eevees to get a Jolteon and gaining more than 4000xp, in a couple of hours, just sitting at home!
 
 Other develpers are welcome to build on this, fix some bugs and come up with more cool stuff.I am looking forward to seeing your additions.
 
