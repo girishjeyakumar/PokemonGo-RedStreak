@@ -3,8 +3,10 @@
 <b>Disclaimer: Using this software is against the ToS and can get you banned. Use at your own risk.</b>
 
 Currently includes the following:
-- Automatic seeking and capturing of specific pokemon within a given radius from a given location
-- Automatic farming of some Pokestop within a given radius from a given location from time to time
+- Automatic seeking and capturing of specific pokemon within a given radius from a given location (Pokemon capture mode)
+- Automatic farming of Pokestops within a given radius from a given location (Pokestops farming mode)
+
+Check below for usage.
 
 ##Some Info
 
@@ -62,22 +64,38 @@ pip install -r requirements.txt
 
 Move into the project folder in the terminal and then run:
 ```
-python main.py -st 10
+python main.py -st 4 [-c or -f]
 ```
 The number following -st indicates the maximum number of steps away from your location it should look, higher numbers being farther.5 steps is approximately a 1.2km radius.
 
-###Using IGNORE and ONLY
+### Modes
+
+#### Pokemon capture mode
+This mode is activated by the -c argument.Run:
+
+```
+python main.py -st 4 -c
+```
+
+#####Using IGNORE and ONLY
 
 Run the following command to ignore some pokemon even if it appears in your scope.These wild pokemon would not be captured.
 
 ```
-python main.py -st 10 -i Pidgey,Rattata
+python main.py -st 4 -c -i Pidgey,Rattata
 ```
 
 Run the following command to only focus on some pokemon that appears in your scope.These wild pokemon are the only ones that would be captured.
 
 ```
-python main.py -st 10 -o Pidgey,Rattata
+python main.py -st 10 -c -o Pidgey,Rattata
+```
+
+#### Pokestops farming mode
+This mode is activated by the -f argument.Run:
+
+```
+python main.py -st 4 -f
 ```
 
 ##Credits
