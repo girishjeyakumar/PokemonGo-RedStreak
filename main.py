@@ -71,6 +71,40 @@ numbertoteam = {
     2: 'Valor',
     3: 'Instinct',
 }
+
+item_name = {
+  '0':'Unknown',
+  '1':'Pokeball',
+  '2':'Greatball',
+  '3':'Ultraball',
+  '4':'Masterball',
+  '101':'Potion',
+  '102':'Super Potion',
+  '103':'Hyper Potion',
+  '104':'Max Potion',
+  '201':'Revive',
+  '202':'Max Revive',
+  '301':'Lucky Egg',
+  '401':'Incense Ordinary',
+  '402':'Incense Spicy',
+  '403':'Incense Cool',
+  '404':'Incense Floral',
+  '501':'Troy Disk',
+  '602':'X Attack',
+  '603':'X Defense',
+  '604':'X Miracle',
+  '701':'Razz Berry',
+  '702':'Bluk Berry',
+  '703':'Nanab Berry',
+  '704':'Wepar Berry',
+  '705':'Pinap Berry',
+  '801':'Special Camera',
+  '901':'Incubator Unlimited',
+  '902':'Incubator Basic',
+  '1001':'Pokemon Storage Upgrade',
+  '1002':'Item Storage Upgrade'
+}
+
 origin_lat, origin_lon = None, None
 
 api = None
@@ -744,7 +778,7 @@ def spin(pokestop, fortid):
     api.fort_search(fort_id=fortid, fort_latitude=lat, fort_longitude=lng, player_latitude=f2i(lat),
                     player_longitude=f2i(lng))
     resp = api.call()
-    # print resp
+    #print resp
     try:
         if 'experience_awarded' in resp['responses']['FORT_SEARCH']:
             print "---- Spinning Pokestop ----"
@@ -753,7 +787,10 @@ def spin(pokestop, fortid):
                 print "---------------------------"
                 exit(0)
             print "[+] Successfully gained %d XP and other items from spinning Pokestop %s" %(resp['responses']['FORT_SEARCH']['experience_awarded'],fortid)
-            print "---------------------------"
+            print "Items obtained:"
+            for item in resp['responses']['FORT_SEARCH']['items_awarded']:
+                if item['item_id']!=0: print item_name[str(item['item_id'])]+",",
+            print "\n---------------------------"
 
     except Exception as e:
         debug(e)
