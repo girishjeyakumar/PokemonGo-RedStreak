@@ -88,7 +88,7 @@ python main.py -st 4 -c -i Pidgey,Rattata
 Run the following command to only focus on some pokemon that appears in your scope.These wild pokemon are the only ones that would be captured.
 
 ```
-python main.py -st 10 -c -o Pidgey,Rattata
+python main.py -st 4 -c -o Pidgey,Rattata
 ```
 
 #### Pokestops farming mode
