@@ -20,6 +20,12 @@ Other develpers are welcome to build on this, fix some bugs and come up with mor
 - Found to work better when the user is offline and the app is closed on the phone while running this.It prevents contradicting location data from the phone and your local system being sent to the backend simultaneously.
 - Refrain from using large search radius as they have a higher chance of getting you banned.Limit to a step-limit of 1 or 2 to be on safer side.
 
+##Preview
+### Pokemon Capture
+![Pokemon Capture](static/Pokemon_Capture.png?raw=true "result screen")
+### Pokestop Farming
+![Pokestop Farming](static/Pokestop_farming.png?raw=true "result screen")
+
 ##Prerequisites
 
 Installation will require Python 2.7 and Pip.Python 3 is currently not supported.
