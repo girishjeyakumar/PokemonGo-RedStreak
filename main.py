@@ -75,6 +75,15 @@ origin_lat, origin_lon = None, None
 
 api = None
 
+search_thread = None
+
+config = None
+api_endpoint = None
+access_token = None 
+profile_response = None
+pokemonsJSON = None
+ignore = None
+only = None
 
 def memoize(obj):
     cache = obj.cache = {}
@@ -381,6 +390,9 @@ def get_token(service, username, password):
 
 
 def init_config():
+
+    global config
+
     parser = argparse.ArgumentParser()
     config_file = "config.json"
 
@@ -405,8 +417,11 @@ def init_config():
     group.add_argument('-i', '--ignore', help='Comma-separated list of Pokémon names or IDs to ignore')
     group.add_argument('-o', '--only', help='Comma-separated list of Pokémon names or IDs to search')
 
-    parser.add_argument('-d', '--debug', help='Debug Mode', action='store_true')
-    parser.set_defaults(DEBUG=False)
+    g = parser.add_mutually_exclusive_group(required=True)
+    g.add_argument('-c', '--capture', help='Pokemon capture mode',action='store_true')
+    g.add_argument('-f', '--farming', help='Farming pokestops mode',action='store_true')
+
+    parser.set_defaults(capture=False,farming=False)
 
     config = parser.parse_args()
 
@@ -418,12 +433,10 @@ def init_config():
     if config.auth_service not in ['ptc', 'google']:
         raise Exception("[-] Invalid Auth service specified! ('ptc' or 'google')")
 
-    return config
-
-
 @memoize
-def login(config):
-    global global_password
+def login():
+
+    global global_password,config
 
     if not global_password:
         if config.password:
@@ -467,11 +480,17 @@ def login(config):
     return api_endpoint, access_token, profile_response
 
 
-def getNearbyPokemon():
+def startScan():
+
+    global config, api_endpoint, access_token, profile_response,pokemonsJSON, ignore, only
+
     full_path = os.path.realpath(__file__)
     (path, filename) = os.path.split(full_path)
 
-    config = init_config()
+    init_config()
+
+    if config.farming: print '[+] Pokestop farming mode activated'
+    if config.capture: print '[+] Pokemon capturing mode activated'
 
     if config.auth_service not in ['ptc', 'google']:
         print '[!] Invalid Auth service specified'
@@ -491,7 +510,7 @@ def getNearbyPokemon():
         print('[+] Getting initial location')
         retrying_set_location(config.location)
 
-    api_endpoint, access_token, profile_response = login(config)
+    api_endpoint, access_token, profile_response = login()
 
     clear_stale_pokemons()
 
@@ -523,8 +542,7 @@ def getNearbyPokemon():
 
         (x, y) = (x + dx, y + dy)
 
-        process_step(config, api_endpoint, access_token, profile_response,
-                     pokemonsJSON, ignore, only)
+        process_step()
 
         print('Completed: ' + str(((step + 1) + pos * .25 - .25) / (steplimit2) * 100) + '%')
 
@@ -539,10 +557,12 @@ def getNearbyPokemon():
     else:
         set_location_coords(origin_lat, origin_lon, 0)
 
-    register_background_thread()
+    # register_background_thread()
 
-def process_step(config, api_endpoint, access_token, profile_response,
-                 pokemonsJSON, ignore, only):
+def process_step():
+
+    global config, api_endpoint, access_token, profile_response,pokemonsJSON, ignore, only
+
     print('[+] Searching at location {} {}'.format(FLOAT_LAT, FLOAT_LONG))
 
     origin = LatLng.from_degrees(FLOAT_LAT, FLOAT_LONG)
@@ -569,34 +589,41 @@ def process_step(config, api_endpoint, access_token, profile_response,
 
             for cell in hh.cells:
 
-                for wild in cell.WildPokemon:
-                    hash = wild.SpawnPointId;
-                    if hash not in seen.keys() or (seen[hash].TimeTillHiddenMs <= wild.TimeTillHiddenMs):
-                        visible.append(wild)
-                    seen[hash] = wild.TimeTillHiddenMs
+                if config.capture:
+                    for wild in cell.WildPokemon:
+                        hash = wild.SpawnPointId;
+                        if hash not in seen.keys() or (seen[hash] <= wild.TimeTillHiddenMs):
+                            visible.append(wild)
+                            capture(wild)
+                            time.sleep(20)
+                        seen[hash] = wild.TimeTillHiddenMs
 
-                if cell.Fort:
+                if config.farming and cell.Fort:
                     for Fort in cell.Fort:
                         if Fort.Enabled == True:
                             if Fort.GymPoints:
                                 gyms[Fort.FortId] = [Fort.Team, Fort.Latitude, Fort.Longitude, Fort.GymPoints]
                             elif Fort.FortType:
                                 pokestops[Fort.FortId] = [Fort.Latitude, Fort.Longitude]
-        except AttributeError as e:
+                                spin(pokestops[Fort.FortId],Fort.FortId)
+                                time.sleep(20)
+        except KeyError as e:
             debug(e)
             break
 
-    for poke in visible:
+def capture(poke):
+
+        global config,pokemonsJSON, ignore, only
 
         pokeid = str(poke.pokemon.PokemonId)
         pokename = pokemonsJSON[pokeid]
 
         if config.ignore:
             if pokename.lower() in ignore or pokeid in ignore:
-                continue
+                return
         elif config.only:
             if pokename.lower() not in only and pokeid not in only:
-                continue
+                return
 
         disappear_timestamp = time.time() + poke.TimeTillHiddenMs / 1000
 
@@ -608,8 +635,9 @@ def process_step(config, api_endpoint, access_token, profile_response,
             "name": pokename
         }
 
-        if pokemon not in pokemons: pokemons.append(pokemon)
-
+        if pokemon not in pokemons: 
+            pokemons.append(pokemon)
+            encounter_and_capture(pokemon)
 
 def clear_stale_pokemons():
     current_time = time.time()
@@ -683,6 +711,7 @@ def encounter_and_capture(pokemon):
             resp = api.call()
 
             # print('Response dictionary: \n\r{}'.format(json.dumps(resp, indent=2)))
+
             try:
                 en_status = resp['responses']['ENCOUNTER']['status']
                 cap_status = resp['responses']['CATCH_POKEMON']['status']
@@ -695,7 +724,9 @@ def encounter_and_capture(pokemon):
                 cp = resp['responses']['ENCOUNTER']['wild_pokemon']['pokemon_data']['cp']
 
                 if cap_status == 1:
+                    print "---- Capturing Pokemon ----"
                     print '[+] %s of CP %d has been successfully captured' % (pokemon['name'], cp)
+                    print "---------------------------"
                     pokemons.remove(pokemon)
                     break
                 elif cap_status != 4:
@@ -717,34 +748,23 @@ def spin(pokestop, fortid):
     try:
         if 'experience_awarded' in resp['responses']['FORT_SEARCH']:
             print "---- Spinning Pokestop ----"
+            if resp['responses']['FORT_SEARCH']['result']==4:
+                print"[!] Your inventory is full! Please make some space."
+                print "---------------------------"
+                exit(0)
             print "[+] Successfully gained %d XP and other items from spinning Pokestop %s" %(resp['responses']['FORT_SEARCH']['experience_awarded'],fortid)
             print "---------------------------"
+
     except Exception as e:
         debug(e)
         return
 
 def main():
-    getNearbyPokemon()
 
-    debug("[+] Number of pokemons found in the neighbourhood: %d" % (len(pokemons)))
-
-    # print pokemons
-    # print pokestops
-    # print gyms
-
-    print "---- Capturing Pokemon -----"
-
-    while True:
-
-        for pokemon in pokemons:
-            encounter_and_capture(pokemon)
-            time.sleep(5)
+    startScan()
     
-        for key in pokestops:
-            pokestop = pokestops[key]
-            spin(pokestop, key)
-            time.sleep(3)
-
 if __name__ == '__main__':
+
     main()
-    register_background_thread(initial_registration=True)
+
+    
